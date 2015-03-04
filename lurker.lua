@@ -8,7 +8,7 @@
 --
 
 -- Assumes lume is in the same directory as this file
-local lume = require((...):gsub("[^/.\\]+$", "lume"))
+local lume = lume or require((...):gsub("[^/.\\]+$", "lume"))
 
 local lurker = { _version = "1.0.1" }
 
