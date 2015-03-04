@@ -45,6 +45,25 @@ hotswap occurs and is passed the name of the file which was swapped.
 lurker.postswap = function(f) print("File " .. f .. " was swapped") end
 ```
 
+### lurker.prescan
+`lurker.prescan` can be set to a function. This function is called before a
+scan occurs.
+```lua
+lurker.prescan = function() print("Scanning for changes...") end
+```
+
+### lurker.postscan
+`lurker.postscan` can be set to a function. This function is called after a
+scan occurs and is passed all the changed files.
+```lua
+lurker.prescan = function(f) print("Scan found and swapped " .. lume.count(f) .. "changes.") end
+```
+
+### lurker.crashhook()
+`lurker.crashhook` can be set to a function. This function is called whenever
+f11 is hit during the crash screen. This could be used to trigger any error 
+reporting behavior in the application without replacing the onerror event.
+
 ### lurker.protected
 Dictates whether lurker should run in protected mode; this is `true` by
 default. If protected mode is disabled then LÖVE's usual error screen is used

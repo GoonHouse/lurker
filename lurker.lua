@@ -247,7 +247,7 @@ function lurker.scan()
   end
   local changed = lurker.getchanged()
   lume.each(changed, lurker.hotswapfile)
-  lurker.postscan()
+  lurker.postscan(changed)
   return changed
 end
 
