@@ -26,6 +26,7 @@ local lovecallbacknames = {
   "mousereleased",
   "keypressed",
   "keyreleased",
+  "textinput",
   "focus",
   "quit",
 }
@@ -36,6 +37,9 @@ function lurker.init()
   lurker.path = "."
   lurker.preswap = function() end
   lurker.postswap = function() end
+  lurker.prescan = function() end
+  lurker.postscan = function() end
+  lurker.crashhook = function() end
   lurker.interval = .5
   lurker.protected = true
   lurker.quiet = false
@@ -115,6 +119,10 @@ function lurker.onerror(e, nostacktrace)
     if k == "escape" then
       lurker.print("Exiting...")
       love.event.quit()
+    elseif k == "f11" then
+      lurker.crashhook()
+    elseif k == "s" then
+      lurker.scan()
     end
   end
 
@@ -233,11 +241,13 @@ end
 
 
 function lurker.scan()
+  lurker.prescan()
   if lurker.state == "init" then
     lurker.exitinitstate()
   end
   local changed = lurker.getchanged()
   lume.each(changed, lurker.hotswapfile)
+  lurker.postscan()
   return changed
 end
 
